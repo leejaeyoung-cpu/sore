@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 성당 관리 시스템 (Church Management System)
 
 ⛪ 신자와 관리자를 위한 현대적인 성당 관리 시스템
@@ -58,3 +59,6 @@ VITE_CLOUDINARY_CLOUD_NAME=your_cloudinary_name
 ## 📄 라이선스
 
 이 프로젝트는 성당 운영을 위한 비상업적 목적으로 제작되었습니다.
+=======
+# sore
+>>>>>>> edf750b7ad492c97d68139d916d4177c1cfae7f4

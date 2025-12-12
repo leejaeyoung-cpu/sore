@@ -28,8 +28,12 @@ dist-ssr
 .env.local
 .env.*.local
 .env.production
+.env.development
 
 # API keys and secrets
 *.pem
 *.key
 secrets/
+
+# OS
+Thumbs.db

@@ -1,0 +1,20 @@
+https://vercel.com/leejaeyoung-cpus-projects/church-app
+
+supabase API ----------------------------------------------------------------
+
+Publishable key -  sb_publishable_s2Ykls6qVRNAFEm5_q3zIQ_ukz4PYy1
+
+Secret keys -  sb_secret__arnyZYsres3EV8D5eTAIg_M9p8OO9_
+
+anon public -  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9xc2dpa3Fjd21kb3JjbHN0Y3RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU1MjQ2NzgsImV4cCI6MjA4MTEwMDY3OH0.VSt-qZtw4qMWEOC56g-mBi7piP_-VE4mbygMZtcG6EE
+
+service_role  -  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9xc2dpa3Fjd21kb3JjbHN0Y3RmIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NTUyNDY3OCwiZXhwIjoyMDgxMTAwNjc4fQ.ZCrEKoJhlbtdt8PnAZvsjEYdbeUFg1VYGX2VvEQ0Ntc
+
+----------------------------------------------------------------------------------
+
+Developer
+
+Cloud name  -  dwufceylv
+Folder mode  -  Dynamic folders
+Root - API Key :  636274292581615
+        -  API Secret :  2KQjHuPkZBfgXfImrYLEH4pPAPA

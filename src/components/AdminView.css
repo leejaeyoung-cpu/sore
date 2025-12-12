@@ -1,71 +1,228 @@
 .admin-view {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     height: 100%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 2rem;
+    background: var(--bg-main);
 }
 
-.admin-title {
-    color: white;
-    font-size: 2rem;
+.admin-header {
+    padding: var(--space-lg);
+    background: white;
+    border-bottom: 1px solid var(--border);
+}
+
+.admin-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
     font-weight: 700;
-    margin-bottom: 3rem;
-    text-align: center;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    color: var(--text-primary);
 }
 
-.admin-buttons {
+/* 탭 메뉴 */
+.admin-tabs {
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    width: 100%;
-    max-width: 280px;
+    gap: 0;
+    background: white;
+    border-bottom: 2px solid var(--border);
+    padding: 0 var(--space-lg);
 }
 
-.admin-button {
-    padding: 1.5rem 2rem;
+.tab {
+    padding: var(--space-md) var(--space-lg);
     border: none;
-    border-radius: 20px;
+    background: transparent;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all var(--transition-base);
+}
+
+.tab:hover {
+    color: var(--text-primary);
+    background: var(--bg-hover);
+}
+
+.tab.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+}
+
+/* 콘텐츠 영역 */
+.admin-content {
+    flex: 1;
+    padding: var(--space-lg);
+    overflow-y: auto;
+}
+
+.admin-content h3 {
+    margin: 0 0 var(--space-lg) 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.admin-content h4 {
+    margin: 0 0 var(--space-md) 0;
     font-size: 1.1rem;
     font-weight: 600;
+}
+
+/* 통계 그리드 */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.stat-card {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: var(--space-xs);
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* 폼 스타일 */
+.form-card {
+    margin-bottom: var(--space-xl);
+}
+
+.announcement-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.form-group label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding: var(--space-md);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
     font-family: 'Noto Sans KR', sans-serif;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    position: relative;
-    overflow: hidden;
-    background: white;
-    color: #764ba2;
+    font-size: 0.95rem;
+    transition: border-color var(--transition-fast);
 }
 
-.admin-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(118, 75, 162, 0.1), transparent);
-    transition: left 0.5s ease;
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary);
 }
 
-.admin-button:hover::before {
-    left: 100%;
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
 }
 
-.admin-button:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+/* 공지사항 목록 */
+.announcements-list {
+    margin-top: var(--space-xl);
 }
 
-.admin-button:active {
-    transform: translateY(-2px) scale(0.98);
+.announcements-list h4 {
+    margin-bottom: var(--space-md);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
 }
 
-.admin-button .icon {
-    margin-right: 0.5rem;
-    font-size: 1.3rem;
+.announcement-item {
+    margin-bottom: var(--space-md);
+}
+
+.announcement-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-sm);
+}
+
+.category-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    background: var(--bg-elevated);
+}
+
+.category-urgent {
+    background: #FFEBEE;
+    color: #C62828;
+}
+
+.category-event {
+    background: #E8F5E9;
+    color: #2E7D32;
+}
+
+.category-liturgy {
+    background: #E3F2FD;
+    color: #1565C0;
+}
+
+.category-general {
+    background: #F5F5F5;
+    color: #616161;
+}
+
+.announcement-date {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.announcement-item h5 {
+    margin: var(--space-sm) 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.announcement-item p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: var(--space-md);
+    line-height: 1.6;
+}
+
+.announcement-actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+/* 메시지 */
+.empty-message {
+    text-align: center;
+    padding: var(--space-xl);
+    color: var(--text-muted);
+}
+
+.info-message {
+    text-align: center;
+    padding: var(--space-xl);
+    color: var(--text-secondary);
 }
