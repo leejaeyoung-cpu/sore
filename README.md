@@ -1,64 +1,41 @@
-<<<<<<< HEAD
-# 성당 관리 시스템 (Church Management System)
+# 성당 관리 시스템
 
-⛪ 신자와 관리자를 위한 현대적인 성당 관리 시스템
+⛪ 현대적인 성당 관리 및 신자 소통 플랫폼
 
-## 📱 주요 기능
+## 🌟 주요 기능
 
-### 신자용 앱
-- 📖 주보 확인
-- 📢 공지사항
-- ⏰ 미사 시간 안내
-- 🎉 행사 등록
-- 💰 온라인 헌금
+### 신자용
+- 📖 주보 보기 (PDF/이미지)
+- 📢 공지사항 확인
+- ⏰ 미사 시간표
+- 🔐 회원가입 및 로그인
 
-### 관리자 대시보드
-- 👥 신자 관리
-- 📝 주보/공지사항 작성
-- 📅 행사 관리
-- 💬 메시지 발송
-- 📊 통계 및 보고서
+### 관리자용
+- 📊 대시보드
+- 📢 공지사항 관리 (이미지 포함)
+- 📖 주보 업로드
+- 👥 회원 관리
 
-## 🚀 기술 스택
+## 🚀 배포
 
-- **Frontend**: React + Vite
-- **Backend**: Supabase
+- **Production**: https://sore-gamma.vercel.app
+- **Framework**: React + Vite
 - **Hosting**: Vercel
+- **Database**: Supabase
 - **Storage**: Cloudinary
-- **Styling**: CSS Modules
 
-## 🛠️ 설치 및 실행
+## 🛠 기술 스택
 
-```bash
-# 의존성 설치
-npm install
+- React 18
+- Vite
+- Supabase (Auth + Database)
+- Cloudinary (Image/File Upload)
+- CSS Modules
 
-# 개발 서버 실행
-npm run dev
+## 📝 라이선스
 
-# 빌드
-npm run build
-```
+개발 중
 
-## 📝 환경 변수
+---
 
-`.env.local` 파일을 생성하고 다음 변수를 설정하세요:
-
-```env
-VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-VITE_CLOUDINARY_CLOUD_NAME=your_cloudinary_name
-```
-
-## 📚 문서
-
-- [구현 계획서](./docs/implementation_plan.md)
-- [개발 로드맵](./docs/roadmap.md)
-- [인프라 설정 가이드](./docs/setup-guide.md)
-
-## 📄 라이선스
-
-이 프로젝트는 성당 운영을 위한 비상업적 목적으로 제작되었습니다.
-=======
-# sore
->>>>>>> edf750b7ad492c97d68139d916d4177c1cfae7f4
+최종 업데이트: 2025-12-12
