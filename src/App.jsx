@@ -7,6 +7,7 @@ import AdminView from './components/AdminView'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Button from './components/Button'
+import InstallPrompt from './components/InstallPrompt'
 
 function AppContent() {
     const [authMode, setAuthMode] = useState('login') // 'login' or 'signup'
@@ -60,6 +61,7 @@ function App() {
     return (
         <AuthProvider>
             <AppContent />
+            <InstallPrompt />
         </AuthProvider>
     )
 }

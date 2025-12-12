@@ -1,0 +1,109 @@
+.install-prompt {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateX(-50%) translateY(100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+.install-prompt-content {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: 90vw;
+    width: 400px;
+}
+
+.install-prompt-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.install-prompt-text {
+    flex: 1;
+}
+
+.install-prompt-text h3 {
+    margin: 0 0 4px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.install-prompt-text p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.install-prompt-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.install-btn {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.install-btn:hover {
+    transform: scale(1.05);
+}
+
+.dismiss-btn {
+    padding: 10px 16px;
+    background: transparent;
+    color: var(--text-secondary);
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.dismiss-btn:hover {
+    background: var(--bg-hover);
+}
+
+@media (max-width: 768px) {
+    .install-prompt-content {
+        flex-direction: column;
+        text-align: center;
+        width: calc(100vw - 40px);
+    }
+
+    .install-prompt-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .install-btn,
+    .dismiss-btn {
+        width: 100%;
+    }
+}
