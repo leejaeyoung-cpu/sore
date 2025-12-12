@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './BelieverView.css'
 import Button from './Button'
 import Card from './Card'
+import BulletinViewer from './BulletinViewer'
 import { getMassSchedulesByDay, getActiveAnnouncements, getLatestBulletins } from '../lib/queries'
 
 function BelieverView() {
@@ -10,6 +11,7 @@ function BelieverView() {
     const [bulletins, setBulletins] = useState([])
     const [loading, setLoading] = useState(true)
     const [currentView, setCurrentView] = useState('home') // 'home', 'announcements', 'bulletins'
+    const [selectedBulletin, setSelectedBulletin] = useState(null) // 주보 뷰어용
 
     useEffect(() => {
         loadData()
@@ -90,47 +92,56 @@ function BelieverView() {
     // 주보 목록 화면
     if (currentView === 'bulletins') {
         return (
-            <div className="believer-view bulletins-view">
-                <div className="view-header">
-                    <button className="back-button" onClick={handleBackToHome}>
-                        ← 뒤로
-                    </button>
-                    <h2>📖 주보</h2>
+            <>
+                <div className="believer-view bulletins-view">
+                    <div className="view-header">
+                        <button className="back-button" onClick={handleBackToHome}>
+                            ← 뒤로
+                        </button>
+                        <h2>📖 주보</h2>
+                    </div>
+
+                    <div className="bulletins-full-list">
+                        {bulletins.length === 0 ? (
+                            <p className="empty-message">등록된 주보가 없습니다.</p>
+                        ) : (
+                            bulletins.map(bulletin => (
+                                <Card key={bulletin.id} padding="md" className="bulletin-card-full" hover>
+                                    {bulletin.cover_image_url && (
+                                        <div className="bulletin-cover-full">
+                                            <img src={bulletin.cover_image_url} alt={bulletin.title} />
+                                        </div>
+                                    )}
+                                    <div className="bulletin-info">
+                                        <h3>{bulletin.title}</h3>
+                                        <p className="bulletin-date-full">
+                                            {new Date(bulletin.week_of).toLocaleDateString('ko-KR', {
+                                                year: 'numeric',
+                                                month: 'long',
+                                                day: 'numeric'
+                                            })}
+                                        </p>
+                                    </div>
+                                    <Button
+                                        variant="primary"
+                                        fullWidth
+                                        onClick={() => setSelectedBulletin(bulletin)}
+                                    >
+                                        📄 주보 보기
+                                    </Button>
+                                </Card>
+                            ))
+                        )}
+                    </div>
                 </div>
 
-                <div className="bulletins-full-list">
-                    {bulletins.length === 0 ? (
-                        <p className="empty-message">등록된 주보가 없습니다.</p>
-                    ) : (
-                        bulletins.map(bulletin => (
-                            <Card key={bulletin.id} padding="md" className="bulletin-card-full" hover>
-                                {bulletin.cover_image_url && (
-                                    <div className="bulletin-cover-full">
-                                        <img src={bulletin.cover_image_url} alt={bulletin.title} />
-                                    </div>
-                                )}
-                                <div className="bulletin-info">
-                                    <h3>{bulletin.title}</h3>
-                                    <p className="bulletin-date-full">
-                                        {new Date(bulletin.week_of).toLocaleDateString('ko-KR', {
-                                            year: 'numeric',
-                                            month: 'long',
-                                            day: 'numeric'
-                                        })}
-                                    </p>
-                                </div>
-                                <Button
-                                    variant="primary"
-                                    fullWidth
-                                    onClick={() => window.open(bulletin.pdf_url, '_blank')}
-                                >
-                                    📄 주보 보기
-                                </Button>
-                            </Card>
-                        ))
-                    )}
-                </div>
-            </div>
+                {selectedBulletin && (
+                    <BulletinViewer
+                        bulletin={selectedBulletin}
+                        onClose={() => setSelectedBulletin(null)}
+                    />
+                )}
+            </>
         )
     }
 
