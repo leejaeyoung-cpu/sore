@@ -47,16 +47,6 @@ function BelieverView({ user, signOut, isAdmin }) {
         return (
             <>
                 <div className="modern-view">
-                    {/* 상단 헤더 */}
-                    <header className="modern-header">
-                        <div className="header-content">
-                            <h1 className="church-logo">⛪ 소래포구성당</h1>
-                            <button className="profile-btn" onClick={signOut}>
-                                로그아웃
-                            </button>
-                        </div>
-                    </header>
-
                     {/* 상단 네비게이션 */}
                     <TopNav currentPage={currentPage} onNavigate={handleNavigate} />
 
@@ -64,6 +54,7 @@ function BelieverView({ user, signOut, isAdmin }) {
                     <div className="hero-banner">
                         <img src="/다운로드.jpg" alt="성당" className="hero-image" />
                         <div className="hero-overlay">
+                            <h1 className="hero-church-name">⛪ 소래포구성당</h1>
                             <h2 className="hero-title">환영합니다</h2>
                             <p className="hero-subtitle">
                                 {new Date().toLocaleDateString('ko-KR', {
