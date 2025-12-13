@@ -1,156 +1,43 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
-
+﻿/* Design System - Colors */
 :root {
-  /* Church Brand Colors (?�당 브랜???�상) */
-  --primary: #C84A31;
-  /* 벽돌??- ?�당 건물 */
-  --primary-dark: #A23922;
-  --primary-light: #E57A65;
-  --secondary: #5B8C51;
-  /* 초록 - ?�무 */
-  --secondary-dark: #3D5E36;
-  --secondary-light: #87B67E;
-  --accent: #D4AF37;
-  /* 금색 - ?�스?��? */
-
-  /* Neutral Colors (중립 ?�상) */
-  --bg-main: #FAFAFA;
-  --bg-card: #FFFFFF;
-  --bg-elevated: #F5F5F5;
-  --bg-hover: #EEEEEE;
-  --text-primary: #212121;
-  --text-secondary: #616161;
-  --text-muted: #9E9E9E;
-
-  /* Semantic Colors (?��? ?�상) */
-  --success: #4CAF50;
-  --warning: #FF9800;
-  --error: #F44336;
-  --info: #2196F3;
-
-  /* UI Colors */
-  --border: #E0E0E0;
-  --border-light: #F5F5F5;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --primary: #667eea;
+  --primary-dark: #5568d3;
+  --secondary: #4facfe;
+  --success: #43e795;
+  --gold: #ffd700;
+  
+  --purple-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --blue-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --green-gradient: linear-gradient(135deg, #43e794 0%, #38f9d7 100%);
+  --gold-gradient: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  
+  --text-primary: #2d3748;
+  --text-secondary: #718096;
+  --bg: #ffffff;
+  --bg-secondary: #f7fafc;
+  --border: #e2e8f0;
+  
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
-
-  /* Gradients */
-  --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-  --gradient-secondary: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
-  --gradient-gold: linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%);
-
-  /* Spacing Scale */
-  --space-xs: 0.25rem;
-  /* 4px */
-  --space-sm: 0.5rem;
-  /* 8px */
-  --space-md: 1rem;
-  /* 16px */
-  --space-lg: 1.5rem;
-  /* 24px */
-  --space-xl: 2rem;
-  /* 32px */
-  --space-2xl: 3rem;
-  /* 48px */
-
-  /* Border Radius */
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0 4px 12px rgba(102, 126, 234, 0.15);
+  
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
   --radius-full: 9999px;
-
-  /* Transitions */
-  --transition-fast: 150ms ease;
-  --transition-base: 250ms ease;
-  --transition-slow: 350ms ease;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }
 
 body {
-  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #FFFFFF;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: var(--text-primary);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
-
-#root {
-  width: 100%;
-  max-width: 1400px;
-}
-/* 모바일 환경변수 */
-:root {
-  /* Safe Area Insets - 노치, 홈 버튼 영역 대응 */
-  --safe-area-inset-top: env(safe-area-inset-top);
-  --safe-area-inset-right: env(safe-area-inset-right);
-  --safe-area-inset-bottom: env(safe-area-inset-bottom);
-  --safe-area-inset-left: env(safe-area-inset-left);
-}
-
-/* 기본 body 설정 - 모바일 최적화 */
-body {
-  /* 터치 스크롤 부드럽게 */
-  -webkit-overflow-scrolling: touch;
-  
-  /* 터치 하이라이트 제거 */
-  -webkit-tap-highlight-color: transparent;
-  
-  /* 텍스트 크기 자동 조절 방지 */
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  
-  /* Safe area 적용 */
-  padding-top: var(--safe-area-inset-top);
-  padding-bottom: var(--safe-area-inset-bottom);
-  padding-left: var(--safe-area-inset-left);
-  padding-right: var(--safe-area-inset-right);
-}
-
-/* 모바일 터치 영역 최적화 */
-button, 
-a,
-input[type=\"checkbox\"],
-.clickable {
-  /* 최소 터치 영역 44x44px */
-  min-height: 44px;
-  min-width: 44px;
-}
-
-/* 스크롤바 숨기기 (모바일 스타일) */
-*::-webkit-scrollbar {
-  display: none;
-}
-
-* {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* 모바일 확대/축소 시에도 레이아웃 유지 */
-@media screen and (max-width: 768px) {
-  html {
-    font-size: 16px; /* 기본 폰트 크기 고정 */
-  }
-  
-  body {
-    overflow-x: hidden; /* 가로 스크롤 방지 */
-  }
-}
-
-/* 가로 모드 최적화 */
-@media screen and (orientation: landscape) and (max-height: 500px) {
-  body {
-    padding-top: max(var(--safe-area-inset-top), 8px);
-    padding-bottom: max(var(--safe-area-inset-bottom), 8px);
-  }
+  background: var(--bg);
+  line-height: 1.6;
 }
