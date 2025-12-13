@@ -164,12 +164,8 @@ function BelieverView({ user, signOut, isAdmin }) {
     // 홈 화면
     return (
         <div className="believer-view">
-            {/* 사용자 정보 - 홈 화면에만 표시 */}
+            {/* 로그아웃 버튼 - 홈 화면에만 표시 */}
             <div className="home-header">
-                <div className="user-info-inline">
-                    <span className="user-email">👤 {user.email}</span>
-                    {isAdmin && <span className="admin-badge-small">관리자</span>}
-                </div>
                 <button className="logout-btn-small" onClick={signOut}>
                     로그아웃
                 </button>
