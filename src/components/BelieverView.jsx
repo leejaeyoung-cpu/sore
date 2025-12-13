@@ -164,91 +164,90 @@ function BelieverView() {
     // 홈 화면
     return (
         <div className="believer-view">
-            <img
-                src="/다운로드.jpg"
-                alt="본당 사진"
-                className="church-photo"
-            />
-
-            <div className="button-section">
-                <Button variant="primary" fullWidth onClick={handleBulletinClick}>
-                    📖 주보
-                </Button>
-                <Button variant="secondary" fullWidth onClick={handleAnnouncementClick}>
-                    📢 공지사항
-                </Button>
-            </div>
-
-            {/* 최근 공지사항 */}
-            {announcements.length > 0 && (
-                <div className="announcements-preview">
-                    <h3>📢 최근 공지</h3>
-                    {announcements.map(announcement => (
-                        <Card
-                            key={announcement.id}
-                            padding="sm"
-                            hover
-                            className="announcement-card"
-                        >
-                            <div className="announcement-category">
-                                {announcement.category === 'urgent' && '🔴 긴급'}
-                                {announcement.category === 'event' && '🎉 행사'}
-                                {announcement.category === 'liturgy' && '⛪ 전례'}
-                                {announcement.category === 'general' && '📌 일반'}
-                            </div>
-                            <h4>{announcement.title}</h4>
-                            <p className="announcement-preview">{announcement.content.substring(0, 100)}...</p>
-                            {announcement.image_url && (
-                                <div className="announcement-image-preview">
-                                    <img src={announcement.image_url} alt={announcement.title} />
-                                </div>
-                            )}
-                        </Card>
-                    ))}
+            {loading ? (
+                <div className="loading-state">
+                    <p>로딩 중...</p>
                 </div>
-            )}
-
-            {/* 미사 시간 안내 */}
-            <div className="mass-schedule">
-                <h2>⏰ 미사 시간 안내</h2>
-                {loading ? (
-                    <p className="loading">로딩 중...</p>
-                ) : (
-                    <div className="schedule-list">
-                        {Object.entries(massSchedules).map(([day, times]) => {
-                            // 시간을 오전/오후로 그룹화
-                            const formattedTimes = times.map(t => {
-                                const [hour, minute] = t.time.split(':')
-                                const h = parseInt(hour)
-                                const displayHour = h > 12 ? h - 12 : h === 0 ? 12 : h
-                                const ampm = h >= 12 ? '오후' : '오전'
-                                return { ampm, time: `${displayHour}:${minute}`, hour: h }
-                            })
-
-                            // 오전/오후별로 그룹화하여 표시
-                            const amTimes = formattedTimes.filter(t => t.ampm === '오전')
-                            const pmTimes = formattedTimes.filter(t => t.ampm === '오후')
-
-                            const timeParts = []
-                            if (amTimes.length > 0) {
-                                timeParts.push('오전 ' + amTimes.map(t => t.time).join(', '))
-                            }
-                            if (pmTimes.length > 0) {
-                                timeParts.push('오후 ' + pmTimes.map(t => t.time).join(', '))
-                            }
-
-                            return (
-                                <div key={day} className="schedule-item">
-                                    <span className="schedule-day">{day}</span>
-                                    <span className="schedule-time">
-                                        {timeParts.join(' ')}
-                                    </span>
-                                </div>
-                            )
-                        })}
+            ) : (
+                <>
+                    <div className="hero-section">
+                        <img src="/다운로드.jpg" alt="성당" className="hero-image" />
+                        <h1>⛪ 환영합니다</h1>
                     </div>
-                )}
-            </div>
+
+                    <div className="quick-actions">
+                        <Button variant="primary" fullWidth onClick={handleBulletinClick}>
+                            📖 주보
+                        </Button>
+                        <Button variant="secondary" fullWidth onClick={handleAnnouncementClick}>
+                            📢 공지사항
+                        </Button>
+                    </div>
+
+                    {/* 최근 공지사항 */}
+                    {announcements.length > 0 && (
+                        <div className="announcements-preview">
+                            <h3>📢 최근 공지</h3>
+                            {announcements.map(announcement => (
+                                <Card
+                                    key={announcement.id}
+                                    padding="sm"
+                                    hover
+                                    className="announcement-card"
+                                >
+                                    <div className="announcement-category">
+                                        {announcement.category === 'urgent' && '🔴 긴급'}
+                                        {announcement.category === 'event' && '🎉 행사'}
+                                        {announcement.category === 'liturgy' && '⛪ 전례'}
+                                        {announcement.category === 'general' && '📌 일반'}
+                                    </div>
+                                    <h4>{announcement.title}</h4>
+                                    <p className="announcement-preview">{announcement.content.substring(0, 100)}...</p>
+                                    {announcement.image_url && (
+                                        <div className="announcement-image-preview">
+                                            <img src={announcement.image_url} alt={announcement.title} />
+                                        </div>
+                                    )}
+                                </Card>
+                            ))}
+                        </div>
+                    )}
+
+                    {/* 미사 시간 안내 */}
+                    <div className="mass-schedule">
+                        <h2>⏰ 미사 시간 안내</h2>
+                        {loading ? (
+                            <p className="loading">로딩 중...</p>
+                        ) : (
+                            <div className="schedule-list">
+                                {Object.entries(massSchedules).map(([day, times]) => (
+                                    <div key={day} className="schedule-item-multi">
+                                        <span className="schedule-day">{day}</span>
+                                        <div className="schedule-times">
+                                            {times.map((t, index) => {
+                                                const [hour, minute] = t.time.split(':')
+                                                const h = parseInt(hour)
+                                                const displayHour = h > 12 ? h - 12 : h === 0 ? 12 : h
+                                                const ampm = h >= 12 ? '오후' : '오전'
+
+                                                // type에서 괄호 안 설명 추출
+                                                const typeMatch = t.type.match(/\((.*?)\)/)
+                                                const description = typeMatch ? `(${typeMatch[1]})` : ''
+
+                                                return (
+                                                    <div key={index} className="time-line">
+                                                        {ampm} {displayHour}:{minute}{description}
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </>
+            )}
         </div>
     )
 }
