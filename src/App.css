@@ -78,3 +78,32 @@
   align-items: flex-start;
   justify-content: center;
 }
+
+/* 앱 컨테이너 모바일 최적화 */
+.app-container {
+  min-height: 100vh;
+  min-height: -webkit-fill-available; /* iOS Safari */
+  display: flex;
+  flex-direction: column;
+}
+
+/* 신자용/관리자용 프레임 모바일 최적화 */
+.frames-container {
+  flex: 1;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media screen and (max-width: 768px) {
+  .frames-container {
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .mobile-frame {
+    max-width: 100%;
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
