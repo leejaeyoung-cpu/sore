@@ -13,7 +13,7 @@ function BulletinViewer({ bulletin, onClose }) {
     const [loading, setLoading] = useState(true)
 
     const isPDF = bulletin.pdf_url?.toLowerCase().endsWith('.pdf')
-    const isImage = !isPDF
+    const hasCoverImage = bulletin.cover_image_url
 
     function onDocumentLoadSuccess({ numPages }) {
         setNumPages(numPages)
@@ -29,14 +29,21 @@ function BulletinViewer({ bulletin, onClose }) {
                 </div>
 
                 <div className="viewer-content">
-                    {isImage ? (
-                        <img
-                            src={bulletin.pdf_url}
-                            alt={bulletin.title}
-                            className="bulletin-image"
-                        />
-                    ) : (
-                        <>
+                    {/* 표지 이미지가 있으면 맨 위에 표시 */}
+                    {hasCoverImage && (
+                        <div className="bulletin-cover-section">
+                            <img
+                                src={bulletin.cover_image_url}
+                                alt={`${bulletin.title} 표지`}
+                                className="bulletin-cover-image"
+                            />
+                            {isPDF && <div className="section-divider">주보 내용</div>}
+                        </div>
+                    )}
+
+                    {/* PDF 내용 */}
+                    {isPDF ? (
+                        <div className="bulletin-pdf-section">
                             {loading && <div className="viewer-loading">주보 로딩 중...</div>}
                             <Document
                                 file={bulletin.pdf_url}
@@ -72,13 +79,24 @@ function BulletinViewer({ bulletin, onClose }) {
                                     </button>
                                 </div>
                             )}
-                        </>
+                        </div>
+                    ) : (
+                        // PDF가 없고 이미지만 있는 경우 (이미 위에 표지로 표시됨)
+                        !hasCoverImage && (
+                            <div className="bulletin-image-only">
+                                <img
+                                    src={bulletin.pdf_url}
+                                    alt={bulletin.title}
+                                    className="bulletin-image"
+                                />
+                            </div>
+                        )
                     )}
                 </div>
 
                 <div className="viewer-footer">
                     <button className="download-btn" onClick={() => window.open(bulletin.pdf_url, '_blank')}>
-                        📥 다운로드
+                        📥 원본 다운로드
                     </button>
                 </div>
             </div>

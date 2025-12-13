@@ -94,3 +94,16 @@
 .auth-link:hover {
     color: var(--primary-dark);
 }
+.quick-login {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border);
+}
+
+.quick-login-label {
+  margin: 0 0 var(--space-sm) 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-align: center;
+  font-weight: 600;
+}

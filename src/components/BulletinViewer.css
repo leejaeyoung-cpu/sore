@@ -203,3 +203,41 @@
         font-size: 0.9rem;
     }
 }
+/* 표지 이미지 섹션 */
+.bulletin-cover-section {
+  margin-bottom: var(--space-lg);
+}
+
+.bulletin-cover-image {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: var(--space-md);
+}
+
+.section-divider {
+  text-align: center;
+  padding: var(--space-md) 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border);
+  margin-bottom: var(--space-lg);
+}
+
+/* PDF 섹션 */
+.bulletin-pdf-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 이미지만 있는 경우 */
+.bulletin-image-only {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

@@ -24,6 +24,19 @@ function Login({ onSwitchToSignup }) {
         }
     }
 
+    async function handleQuickLogin() {
+        setLoading(true)
+        setError('')
+        try {
+            // 여기에 실제 비밀번호 입력 필요
+            await signIn('brookin@hanmail.net', 'your-password')
+        } catch (error) {
+            setError('자동 로그인 실패: ' + error.message)
+        } finally {
+            setLoading(false)
+        }
+    }
+
     return (
         <div className="auth-container">
             <div className="auth-card">
@@ -60,6 +73,18 @@ function Login({ onSwitchToSignup }) {
                         {loading ? '로그인 중...' : '로그인'}
                     </Button>
                 </form>
+
+                <div className="quick-login">
+                    <p className="quick-login-label">빠른 테스트</p>
+                    <Button
+                        variant="outline"
+                        fullWidth
+                        onClick={handleQuickLogin}
+                        disabled={loading}
+                    >
+                        👤 관리자로 자동 로그인
+                    </Button>
+                </div>
 
                 <div className="auth-footer">
                     <p>
