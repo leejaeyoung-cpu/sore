@@ -104,6 +104,11 @@ function BelieverView({ user, signOut, isAdmin }) {
                                         className="notice-box"
                                         onClick={() => setSelectedAnnouncement(announcement)}
                                     >
+                                        {announcement.image_url && (
+                                            <div className="notice-box-image">
+                                                <img src={announcement.image_url} alt={announcement.title} />
+                                            </div>
+                                        )}
                                         <span className={`category-badge ${announcement.category}`}>
                                             {announcement.category === 'urgent' && '🔴 긴급'}
                                             {announcement.category === 'event' && '🎉 행사'}
@@ -111,6 +116,9 @@ function BelieverView({ user, signOut, isAdmin }) {
                                             {announcement.category === 'general' && '📌'}
                                         </span>
                                         <h4 className="notice-box-title">{announcement.title}</h4>
+                                        <p className="notice-box-preview">
+                                            {announcement.content.substring(0, 40)}...
+                                        </p>
                                         <p className="notice-box-date">
                                             {new Date(announcement.published_at).toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' })}
                                         </p>
