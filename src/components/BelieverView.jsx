@@ -313,9 +313,6 @@ function BelieverView({ user, signOut, isAdmin }) {
     return (
         <>
             <div className="modern-view">
-                {/* 상단 네비게이션 */}
-                <TopNav currentPage={currentPage} onNavigate={handleNavigate} />
-
                 <div className="coming-soon-page">
                     <p>🚧 준비 중입니다</p>
                 </div>
