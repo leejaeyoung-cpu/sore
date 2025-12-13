@@ -9,8 +9,17 @@ if (!supabaseUrl || !supabaseAnonKey) {
     console.error('VITE_SUPABASE_ANON_KEY:', supabaseAnonKey ? '설정됨' : '미설정')
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+    auth: {
+        persistSession: true,
+        storageKey: 'church-auth',
+        storage: window.localStorage,
+        autoRefreshToken: true,
+        detectSessionInUrl: false
+    }
+})
 
 // 연결 테스트
 console.log('✅ Supabase 클라이언트 초기화 완료')
 console.log('📍 Supabase URL:', supabaseUrl)
+console.log('🔐 세션 저장: localStorage')

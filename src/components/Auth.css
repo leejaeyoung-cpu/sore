@@ -130,3 +130,13 @@
 .checkbox-label span {
   user-select: none;
 }
+
+.auth-hint {
+  text-align: center;
+  margin-top: var(--space-md);
+  padding: var(--space-sm);
+  background: var(--bg-hover);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
