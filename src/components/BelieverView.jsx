@@ -50,7 +50,7 @@ function BelieverView({ user, signOut, isAdmin }) {
                     {/* 상단 헤더 */}
                     <header className="modern-header">
                         <div className="header-content">
-                            <h1 className="church-logo">⛪ 성당</h1>
+                            <h1 className="church-logo">⛪ 소래포구성당</h1>
                             <button className="profile-btn" onClick={signOut}>
                                 로그아웃
                             </button>

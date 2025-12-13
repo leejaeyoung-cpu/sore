@@ -49,7 +49,7 @@
   left: 0;
   right: 0;
   padding: 32px 24px;
-  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
   color: white;
 }
 
@@ -78,13 +78,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 32px;
+  padding: 16px;
   border: none;
   border-radius: 16px;
   cursor: pointer;
   transition: all 0.3s;
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
-  min-height: 140px;
+  min-height: 70px;
   color: white;
 }
 
@@ -109,12 +109,12 @@
 }
 
 .action-icon {
-  font-size: 3rem;
-  margin-bottom: 8px;
+  font-size: 1.8rem;
+  margin-bottom: 4px;
 }
 
 .action-label {
-  font-size: 1.125rem;
+  font-size: 0.95rem;
   font-weight: 700;
 }
 
