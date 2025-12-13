@@ -3,6 +3,7 @@ import './BelieverView.css'
 import Button from './Button'
 import Card from './Card'
 import BulletinViewer from './BulletinViewer'
+import AnnouncementViewer from './AnnouncementViewer'
 import { getMassSchedulesByDay, getActiveAnnouncements, getLatestBulletins } from '../lib/queries'
 
 function BelieverView() {
@@ -12,6 +13,7 @@ function BelieverView() {
     const [loading, setLoading] = useState(true)
     const [currentView, setCurrentView] = useState('home') // 'home', 'announcements', 'bulletins'
     const [selectedBulletin, setSelectedBulletin] = useState(null) // 주보 뷰어용
+    const [selectedAnnouncement, setSelectedAnnouncement] = useState(null) // 공지사항 뷰어용
 
     useEffect(() => {
         loadData()
@@ -49,43 +51,57 @@ function BelieverView() {
     // 공지사항 목록 화면
     if (currentView === 'announcements') {
         return (
-            <div className="believer-view announcements-view">
-                <div className="view-header">
-                    <button className="back-button" onClick={handleBackToHome}>
-                        ← 뒤로
-                    </button>
-                    <h2>📢 공지사항</h2>
+            <>
+                <div className="believer-view announcements-view">
+                    <div className="view-header">
+                        <button className="back-button" onClick={handleBackToHome}>
+                            ← 뒤로
+                        </button>
+                        <h2>📢 공지사항</h2>
+                    </div>
+
+                    <div className="announcements-full-list">
+                        {announcements.length === 0 ? (
+                            <p className="empty-message">등록된 공지사항이 없습니다.</p>
+                        ) : (
+                            announcements.map(announcement => (
+                                <Card
+                                    key={announcement.id}
+                                    padding="md"
+                                    className="announcement-full-card"
+                                    hover
+                                    onClick={() => setSelectedAnnouncement(announcement)}
+                                >
+                                    <div className="announcement-header">
+                                        <span className={`category-badge category-${announcement.category}`}>
+                                            {announcement.category === 'urgent' && '🔴 긴급'}
+                                            {announcement.category === 'event' && '🎉 행사'}
+                                            {announcement.category === 'liturgy' && '⛪ 전례'}
+                                            {announcement.category === 'general' && '📌 일반'}
+                                        </span>
+                                        <span className="announcement-date">
+                                            {new Date(announcement.published_at).toLocaleDateString('ko-KR')}
+                                        </span>
+                                    </div>
+                                    <h3>{announcement.title}</h3>
+                                    <p className="announcement-preview">
+                                        {announcement.content.length > 100
+                                            ? announcement.content.substring(0, 100) + '...'
+                                            : announcement.content}
+                                    </p>
+                                </Card>
+                            ))
+                        )}
+                    </div>
                 </div>
 
-                <div className="announcements-full-list">
-                    {announcements.length === 0 ? (
-                        <p className="empty-message">등록된 공지사항이 없습니다.</p>
-                    ) : (
-                        announcements.map(announcement => (
-                            <Card key={announcement.id} padding="md" className="announcement-full-card" hover>
-                                <div className="announcement-header">
-                                    <span className={`category-badge category-${announcement.category}`}>
-                                        {announcement.category === 'urgent' && '🔴 긴급'}
-                                        {announcement.category === 'event' && '🎉 행사'}
-                                        {announcement.category === 'liturgy' && '⛪ 전례'}
-                                        {announcement.category === 'general' && '📌 일반'}
-                                    </span>
-                                    <span className="announcement-date">
-                                        {new Date(announcement.published_at).toLocaleDateString('ko-KR')}
-                                    </span>
-                                </div>
-                                <h3>{announcement.title}</h3>
-                                <p className="announcement-content">{announcement.content}</p>
-                                {announcement.image_url && (
-                                    <div className="announcement-image-full">
-                                        <img src={announcement.image_url} alt={announcement.title} />
-                                    </div>
-                                )}
-                            </Card>
-                        ))
-                    )}
-                </div>
-            </div>
+                {selectedAnnouncement && (
+                    <AnnouncementViewer
+                        announcement={selectedAnnouncement}
+                        onClose={() => setSelectedAnnouncement(null)}
+                    />
+                )}
+            </>
         )
     }
 

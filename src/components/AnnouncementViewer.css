@@ -1,0 +1,184 @@
+.announcement-viewer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.2s;
+}
+
+.announcement-viewer {
+    background: white;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 700px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.announcement-viewer .viewer-header {
+    padding: 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.header-content {
+    flex: 1;
+}
+
+.announcement-viewer .category-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.category-urgent {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.category-event {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+.category-liturgy {
+    background: #e8eaf6;
+    color: #3949ab;
+}
+
+.category-general {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+.announcement-viewer h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+}
+
+.announcement-date {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.announcement-viewer .close-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: var(--bg-hover);
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.announcement-viewer .close-btn:hover {
+    background: var(--border);
+    transform: rotate(90deg);
+}
+
+.announcement-viewer .viewer-content {
+    flex: 1;
+    overflow: auto;
+    padding: 24px;
+}
+
+.announcement-image-section {
+    margin-bottom: 24px;
+}
+
+.announcement-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.announcement-content {
+    line-height: 1.8;
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.announcement-content p {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.announcement-viewer .viewer-footer {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+}
+
+.close-footer-btn {
+    padding: 12px 32px;
+    background: var(--bg-hover);
+    color: var(--text-primary);
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.close-footer-btn:hover {
+    background: var(--border);
+}
+
+@media (max-width: 768px) {
+    .announcement-viewer {
+        max-width: 100%;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+    }
+
+    .viewer-content {
+        padding: 20px;
+    }
+
+    .announcement-viewer h3 {
+        font-size: 1.3rem;
+    }
+}

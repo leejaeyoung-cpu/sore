@@ -384,3 +384,21 @@
     font-size: 0.95rem;
     color: var(--text-secondary);
 }
+
+/* 공지사항 미리보기 */
+.announcement-preview {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: var(--space-sm) 0 0 0;
+}
+
+.announcement-full-card {
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.announcement-full-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
