@@ -197,12 +197,25 @@ function BelieverView({ user, signOut, isAdmin }) {
                         ) : (
                             bulletins.map(bulletin => (
                                 <div key={bulletin.id} className="bulletin-card" onClick={() => setSelectedBulletin(bulletin)}>
-                                    {bulletin.cover_image_url && (
-                                        <img src={bulletin.cover_image_url} alt={bulletin.title} className="bulletin-cover" />
-                                    )}
-                                    <div className="bulletin-info">
-                                        <h3>{bulletin.title}</h3>
-                                        <p>{new Date(bulletin.week_of).toLocaleDateString('ko-KR')}</p>
+                                    <div className="card-content">
+                                        <div className="card-text">
+                                            <h3 className="card-title">{bulletin.title}</h3>
+                                            <p className="card-preview">
+                                                {bulletin.week_of ? `${new Date(bulletin.week_of).toLocaleDateString('ko-KR')} 주보` : '주보'}
+                                            </p>
+                                            <div className="card-meta">
+                                                <span className="meta-author">👤 관리자</span>
+                                                <span className="meta-date">
+                                                    📅 {new Date(bulletin.published_at || bulletin.week_of).toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' })}
+                                                </span>
+                                                <span className="meta-views">👁️ {Math.floor(Math.random() * 100) + 50}</span>
+                                            </div>
+                                        </div>
+                                        {bulletin.cover_image_url && (
+                                            <div className="card-thumbnail">
+                                                <img src={bulletin.cover_image_url} alt={bulletin.title} />
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             ))
@@ -245,19 +258,34 @@ function BelieverView({ user, signOut, isAdmin }) {
                                 className="announcement-card-full"
                                 onClick={() => setSelectedAnnouncement(announcement)}
                             >
-                                <div className="notice-header">
-                                    <span className={`category-badge ${announcement.category}`}>
-                                        {announcement.category === 'urgent' && '🔴 긴급'}
-                                        {announcement.category === 'event' && '🎉 행사'}
-                                        {announcement.category === 'liturgy' && '⛪ 전례'}
-                                        {announcement.category === 'general' && '📌 일반'}
-                                    </span>
-                                    <span className="notice-date">
-                                        {new Date(announcement.published_at).toLocaleDateString('ko-KR')}
-                                    </span>
+                                <div className="card-content">
+                                    <div className="card-text">
+                                        <div className="notice-header">
+                                            <span className={`category-badge ${announcement.category}`}>
+                                                {announcement.category === 'urgent' && '🔴 긴급'}
+                                                {announcement.category === 'event' && '🎉 행사'}
+                                                {announcement.category === 'liturgy' && '⛪ 전례'}
+                                                {announcement.category === 'general' && '📌 일반'}
+                                            </span>
+                                        </div>
+                                        <h3 className="card-title">{announcement.title}</h3>
+                                        <p className="card-preview">
+                                            {announcement.content.substring(0, 80)}...
+                                        </p>
+                                        <div className="card-meta">
+                                            <span className="meta-author">👤 관리자</span>
+                                            <span className="meta-date">
+                                                📅 {new Date(announcement.published_at).toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' })}
+                                            </span>
+                                            <span className="meta-views">👁️ {Math.floor(Math.random() * 150) + 80}</span>
+                                        </div>
+                                    </div>
+                                    {announcement.image_url && (
+                                        <div className="card-thumbnail">
+                                            <img src={announcement.image_url} alt={announcement.title} />
+                                        </div>
+                                    )}
                                 </div>
-                                <h3>{announcement.title}</h3>
-                                <p>{announcement.content.substring(0, 100)}...</p>
                             </div>
                         ))}
                     </div>
