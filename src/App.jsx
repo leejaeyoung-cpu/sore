@@ -29,32 +29,10 @@ function AppContent() {
         return <Login onSwitchToSignup={() => setAuthMode('signup')} />
     }
 
-    // 로그인한 경우 - 기존 UI 표시
-    const isAdminUser = user.email === 'brookin@hanmail.net'
-
+    // 로그인한 경우 - 전체 화면
     return (
-        <div className="app-container">
-            <div className="app-header">
-                <div className="user-info">
-                    <span>👤 {user.email}</span>
-                    {isAdminUser && <span className="admin-badge">관리자</span>}
-                </div>
-                <Button variant="ghost" size="sm" onClick={signOut}>
-                    로그아웃
-                </Button>
-            </div>
-
-            <div className="frames-container">
-                <MobileFrame title="신자용">
-                    <BelieverView />
-                </MobileFrame>
-
-                {isAdminUser && (
-                    <MobileFrame title="관리자용">
-                        <AdminView />
-                    </MobileFrame>
-                )}
-            </div>
+        <div className="app-full-screen">
+            <BelieverView user={user} signOut={signOut} isAdmin={isAdmin} />
         </div>
     )
 }
