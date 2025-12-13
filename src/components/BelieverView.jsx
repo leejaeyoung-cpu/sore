@@ -5,6 +5,7 @@ import Card from './Card'
 import BulletinViewer from './BulletinViewer'
 import AnnouncementViewer from './AnnouncementViewer'
 import BottomNav from './BottomNav'
+import TopNav from './TopNav'
 import { getMassSchedulesByDay, getActiveAnnouncements, getLatestBulletins } from '../lib/queries'
 
 function BelieverView({ user, signOut, isAdmin }) {
@@ -55,6 +56,9 @@ function BelieverView({ user, signOut, isAdmin }) {
                             </button>
                         </div>
                     </header>
+
+                    {/* 상단 네비게이션 */}
+                    <TopNav currentPage={currentPage} onNavigate={handleNavigate} />
 
                     {/* 환영 배너 */}
                     <div className="hero-banner">
@@ -178,10 +182,8 @@ function BelieverView({ user, signOut, isAdmin }) {
         return (
             <>
                 <div className="modern-view">
-                    <header className="page-header">
-                        <button className="back-btn" onClick={() => setCurrentPage('home')}>←</button>
-                        <h2>📖 주보</h2>
-                    </header>
+                    {/* 상단 네비게이션 */}
+                    <TopNav currentPage={currentPage} onNavigate={handleNavigate} />
 
                     <div className="bulletins-list">
                         {bulletins.length === 0 ? (
@@ -221,10 +223,8 @@ function BelieverView({ user, signOut, isAdmin }) {
         return (
             <>
                 <div className="modern-view">
-                    <header className="page-header">
-                        <button className="back-btn" onClick={() => setCurrentPage('home')}>←</button>
-                        <h2>📢 공지사항</h2>
-                    </header>
+                    {/* 상단 네비게이션 */}
+                    <TopNav currentPage={currentPage} onNavigate={handleNavigate} />
 
                     <div className="announcements-list">
                         {announcements.map(announcement => (
@@ -269,10 +269,8 @@ function BelieverView({ user, signOut, isAdmin }) {
     return (
         <>
             <div className="modern-view">
-                <header className="page-header">
-                    <button className="back-btn" onClick={() => setCurrentPage('home')}>←</button>
-                    <h2>준비 중</h2>
-                </header>
+                {/* 상단 네비게이션 */}
+                <TopNav currentPage={currentPage} onNavigate={handleNavigate} />
 
                 <div className="coming-soon-page">
                     <p>🚧 준비 중입니다</p>
