@@ -226,3 +226,68 @@
     padding: var(--space-xl);
     color: var(--text-secondary);
 }
+/* 여러 이미지 미리보기 */
+.images-preview {
+  margin-top: var(--space-md);
+}
+
+.images-count {
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: var(--space-sm);
+}
+
+.images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--space-md);
+}
+
+.image-preview-item {
+  position: relative;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: white;
+}
+
+.image-preview-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.image-controls {
+  padding: var(--space-xs);
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  gap: var(--space-xs);
+  align-items: center;
+  justify-content: center;
+}
+
+.move-btn,
+.remove-btn {
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  background: white;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.move-btn:hover:not(:disabled),
+.remove-btn:hover {
+  background: var(--bg-hover);
+}
+
+.move-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.remove-btn {
+  color: #c62828;
+  font-weight: bold;
+}

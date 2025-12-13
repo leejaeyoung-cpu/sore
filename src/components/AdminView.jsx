@@ -25,7 +25,7 @@ function AdminView() {
     const [newBulletin, setNewBulletin] = useState({
         title: '',
         week_of: '',
-        pdf_url: '',
+        images: [], // 여러 이미지 저장
         cover_image_url: ''
     })
 
@@ -146,26 +146,61 @@ function AdminView() {
     }
 
     // 주보 관련 함수들
-    async function handlePDFUpload(e) {
-        const file = e.target.files[0]
-        if (!file) return
+    async function handleBulletinImagesUpload(e) {
+        const files = Array.from(e.target.files)
+        if (files.length === 0) return
 
-        if (file.type !== 'application/pdf' && !file.type.startsWith('image/')) {
-            alert('PDF 또는 이미지 파일만 업로드 가능합니다.')
+        // 이미지 파일만 허용
+        const invalidFiles = files.filter(f => !f.type.startsWith('image/'))
+        if (invalidFiles.length > 0) {
+            alert('이미지 파일만 업로드 가능합니다.')
             return
         }
 
         setUploadingFile(true)
         try {
-            const result = await uploadFile(file)
-            setNewBulletin({ ...newBulletin, pdf_url: result.url })
-            alert('파일 업로드 완료!')
+            const uploadPromises = files.map(file => uploadImage(file))
+            const uploadedUrls = await Promise.all(uploadPromises)
+
+            // 기존 이미지에 새 이미지 추가
+            const newImages = uploadedUrls.map((url, index) => ({
+                url,
+                order: newBulletin.images.length + index
+            }))
+
+            setNewBulletin({
+                ...newBulletin,
+                images: [...newBulletin.images, ...newImages]
+            })
+
+            alert(`${files.length}개 이미지 업로드 완료!`)
         } catch (error) {
-            console.error('파일 업로드 오류:', error)
-            alert('파일 업로드 실패: ' + error.message)
+            console.error('이미지 업로드 오류:', error)
+            alert('이미지 업로드 실패: ' + error.message)
         } finally {
             setUploadingFile(false)
         }
+    }
+
+    function removeBulletinImage(index) {
+        const newImages = newBulletin.images.filter((_, i) => i !== index)
+        // order 재정렬
+        const reorderedImages = newImages.map((img, i) => ({ ...img, order: i }))
+        setNewBulletin({ ...newBulletin, images: reorderedImages })
+    }
+
+    function moveBulletinImage(index, direction) {
+        const newImages = [...newBulletin.images]
+        const newIndex = index + direction
+
+        if (newIndex < 0 || newIndex >= newImages.length) return
+
+        // 위치 교환
+        [newImages[index], newImages[newIndex]] = [newImages[newIndex], newImages[index]]
+
+        // order 재정렬
+        const reorderedImages = newImages.map((img, i) => ({ ...img, order: i }))
+        setNewBulletin({ ...newBulletin, images: reorderedImages })
     }
 
     async function handleBulletinCoverUpload(e) {
@@ -200,7 +235,7 @@ function AdminView() {
                 .insert({
                     title: newBulletin.title,
                     week_of: newBulletin.week_of,
-                    pdf_url: newBulletin.pdf_url,
+                    images: newBulletin.images,
                     cover_image_url: newBulletin.cover_image_url || null,
                     published_at: new Date().toISOString()
                 })
@@ -208,7 +243,7 @@ function AdminView() {
             if (error) throw error
 
             alert('주보가 등록되었습니다!')
-            setNewBulletin({ title: '', week_of: '', pdf_url: '', cover_image_url: '' })
+            setNewBulletin({ title: '', week_of: '', images: [], cover_image_url: '' })
             loadData()
         } catch (error) {
             console.error('주보 등록 오류:', error)
@@ -371,16 +406,54 @@ function AdminView() {
                             </div>
 
                             <div className="form-group">
-                                <label>주보 파일 (PDF 또는 이미지)</label>
+                                <label>주보 이미지 (여러 장 업로드 가능)</label>
                                 <input
                                     type="file"
-                                    accept="application/pdf,image/*"
-                                    onChange={handlePDFUpload}
+                                    accept="image/*"
+                                    onChange={handleBulletinImagesUpload}
                                     disabled={uploadingFile}
-                                    required={!newBulletin.pdf_url}
+                                    multiple
                                 />
-                                {uploadingFile && <p className="upload-status">파일 업로드 중...</p>}
-                                {newBulletin.pdf_url && <p className="upload-success">✓ 파일 업로드 완료</p>}
+                                {uploadingFile && <p className="upload-status">이미지 업로드 중...</p>}
+
+                                {newBulletin.images.length > 0 && (
+                                    <div className="images-preview">
+                                        <p className="images-count">📄 {newBulletin.images.length}개 페이지</p>
+                                        <div className="images-grid">
+                                            {newBulletin.images.sort((a, b) => a.order - b.order).map((img, index) => (
+                                                <div key={index} className="image-preview-item">
+                                                    <img src={img.url} alt={`페이지 ${index + 1}`} />
+                                                    <div className="image-controls">
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => moveBulletinImage(index, -1)}
+                                                            disabled={index === 0}
+                                                            className="move-btn"
+                                                        >
+                                                            ↑
+                                                        </button>
+                                                        <span>{index + 1}</span>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => moveBulletinImage(index, 1)}
+                                                            disabled={index === newBulletin.images.length - 1}
+                                                            className="move-btn"
+                                                        >
+                                                            ↓
+                                                        </button>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => removeBulletinImage(index)}
+                                                            className="remove-btn"
+                                                        >
+                                                            ✕
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
 
                             <div className="form-group">
@@ -402,7 +475,7 @@ function AdminView() {
                                 )}
                             </div>
 
-                            <Button type="submit" variant="primary" disabled={loading || uploadingFile || uploadingImage}>
+                            <Button type="submit" variant="primary" disabled={loading || uploadingFile || uploadingImage || newBulletin.images.length === 0}>
                                 {loading ? '등록 중...' : '주보 등록'}
                             </Button>
                         </form>

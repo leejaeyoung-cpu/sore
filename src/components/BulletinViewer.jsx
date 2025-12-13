@@ -2,13 +2,25 @@ import { useState } from 'react'
 import './BulletinViewer.css'
 
 function BulletinViewer({ bulletin, onClose }) {
-    const isPDF = bulletin.pdf_url?.toLowerCase().endsWith('.pdf')
-    const hasCoverImage = bulletin.cover_image_url
+    const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
-    // PDF를 Google Docs Viewer로 표시
-    const pdfViewerUrl = isPDF
-        ? `https://docs.google.com/viewer?url=${encodeURIComponent(bulletin.pdf_url)}&embedded=true`
-        : null
+    // images 배열 가져오기 (새 형식) 또는 pdf_url (구 형식)
+    const images = bulletin.images && bulletin.images.length > 0
+        ? bulletin.images.sort((a, b) => a.order - b.order).map(img => img.url)
+        : bulletin.pdf_url
+            ? [bulletin.pdf_url]
+            : []
+
+    const hasCoverImage = bulletin.cover_image_url
+    const totalImages = images.length
+
+    function goToNextImage() {
+        setCurrentImageIndex((prev) => Math.min(prev + 1, totalImages - 1))
+    }
+
+    function goToPrevImage() {
+        setCurrentImageIndex((prev) => Math.max(prev - 1, 0))
+    }
 
     return (
         <div className="bulletin-viewer-overlay" onClick={onClose}>
@@ -19,7 +31,7 @@ function BulletinViewer({ bulletin, onClose }) {
                 </div>
 
                 <div className="viewer-content">
-                    {/* 표지 이미지가 있으면 맨 위에 표시 */}
+                    {/* 표지 이미지 */}
                     {hasCoverImage && (
                         <div className="bulletin-cover-section">
                             <img
@@ -27,39 +39,59 @@ function BulletinViewer({ bulletin, onClose }) {
                                 alt={`${bulletin.title} 표지`}
                                 className="bulletin-cover-image"
                             />
-                            {isPDF && <div className="section-divider">📄 주보 내용</div>}
+                            {totalImages > 0 && <div className="section-divider">📄 주보 내용</div>}
                         </div>
                     )}
 
-                    {/* PDF 또는 이미지 내용 */}
-                    {isPDF ? (
-                        <div className="bulletin-pdf-section">
-                            <iframe
-                                src={pdfViewerUrl}
-                                className="pdf-iframe"
-                                title={bulletin.title}
-                            />
-                            <p className="pdf-hint">
-                                💡 PDF가 안 보이면 <button className="inline-link" onClick={() => window.open(bulletin.pdf_url, '_blank')}>여기를 클릭</button>하세요
-                            </p>
-                        </div>
-                    ) : (
-                        // PDF가 없고 이미지만 있는 경우
-                        !hasCoverImage && (
-                            <div className="bulletin-image-only">
+                    {/* 주보 이미지들 */}
+                    {totalImages > 0 && (
+                        <div className="bulletin-images-section">
+                            <div className="image-display">
                                 <img
-                                    src={bulletin.pdf_url}
-                                    alt={bulletin.title}
-                                    className="bulletin-image"
+                                    src={images[currentImageIndex]}
+                                    alt={`${bulletin.title} - ${currentImageIndex + 1}페이지`}
+                                    className="bulletin-page-image"
                                 />
                             </div>
-                        )
+
+                            {totalImages > 1 && (
+                                <div className="image-navigation">
+                                    <button
+                                        onClick={goToPrevImage}
+                                        disabled={currentImageIndex === 0}
+                                        className="nav-btn"
+                                    >
+                                        ← 이전
+                                    </button>
+                                    <span className="page-indicator">
+                                        {currentImageIndex + 1} / {totalImages}
+                                    </span>
+                                    <button
+                                        onClick={goToNextImage}
+                                        disabled={currentImageIndex === totalImages - 1}
+                                        className="nav-btn"
+                                    >
+                                        다음 →
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    {totalImages === 0 && !hasCoverImage && (
+                        <div className="empty-bulletin">
+                            <p>주보 내용이 없습니다.</p>
+                        </div>
                     )}
                 </div>
 
                 <div className="viewer-footer">
-                    <button className="download-btn" onClick={() => window.open(bulletin.pdf_url, '_blank')}>
-                        📥 새 탭에서 열기
+                    <button className="download-btn" onClick={() => {
+                        images.forEach((url, index) => {
+                            setTimeout(() => window.open(url, '_blank'), index * 500)
+                        })
+                    }}>
+                        📥 모든 페이지 다운로드
                     </button>
                 </div>
             </div>
