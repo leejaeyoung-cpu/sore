@@ -516,3 +516,43 @@
 .notice-box-date::before {
   content: ' ';
 }
+
+/* 미사 시간 가로 스크롤 */
+.schedule-table-modern {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.schedule-table-modern::-webkit-scrollbar {
+  height: 6px;
+}
+
+.schedule-table-modern::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 3px;
+}
+
+.schedule-table-modern::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 3px;
+}
+
+.schedule-card {
+  flex: 0 0 180px;
+  background: var(--bg);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 
+    0 2px 0 0 rgba(92, 114, 212, 0.1),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 2px solid var(--border-light);
+  transition: all 0.3s;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
+}
