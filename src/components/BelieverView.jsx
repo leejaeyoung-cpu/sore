@@ -100,8 +100,8 @@ function BelieverView({ user, signOut, isAdmin }) {
                         </button>
 
                         <button className="action-card gold">
-                            <span className="action-icon">💰</span>
-                            <span className="action-label">헌금</span>
+                            <span className="action-icon">🤝</span>
+                            <span className="action-label">단체</span>
                             <span className="coming-soon">준비중</span>
                         </button>
                     </div>

@@ -6,7 +6,7 @@ function TopNav({ currentPage, onNavigate }) {
         { id: 'bulletin', icon: '📖', label: '주보' },
         { id: 'announcements', icon: '📢', label: '공지' },
         { id: 'community', icon: '👥', label: '게시판' },
-        { id: 'donation', icon: '💰', label: '헌금' }
+        { id: 'donation', icon: '🤝', label: '단체' }
     ]
 
     return (
