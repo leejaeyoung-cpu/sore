@@ -341,3 +341,18 @@
   font-size: 2.2rem;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
+
+/* 퀵 액션 버튼 크기 축소 */
+.action-card {
+  min-height: 35px;
+  padding: 8px 12px;
+}
+
+.action-icon {
+  font-size: 1.5rem;
+  margin-bottom: 2px;
+}
+
+.action-label {
+  font-size: 0.8rem;
+}
