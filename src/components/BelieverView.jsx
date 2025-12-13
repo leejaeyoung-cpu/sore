@@ -5,7 +5,6 @@ import Card from './Card'
 import BulletinViewer from './BulletinViewer'
 import AnnouncementViewer from './AnnouncementViewer'
 import BottomNav from './BottomNav'
-import TopNav from './TopNav'
 import { getMassSchedulesByDay, getActiveAnnouncements, getLatestBulletins } from '../lib/queries'
 
 function BelieverView({ user, signOut, isAdmin }) {
@@ -47,9 +46,6 @@ function BelieverView({ user, signOut, isAdmin }) {
         return (
             <>
                 <div className="modern-view">
-                    {/* 상단 네비게이션 */}
-                    <TopNav currentPage={currentPage} onNavigate={handleNavigate} />
-
                     {/* 환영 배너 */}
                     <div className="hero-banner">
                         <img src="/다운로드.jpg" alt="성당" className="hero-image" />
