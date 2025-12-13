@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import Button from './Button'
 import './Auth.css'
@@ -6,9 +6,19 @@ import './Auth.css'
 function Login({ onSwitchToSignup }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [rememberMe, setRememberMe] = useState(false)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
     const { signIn } = useAuth()
+
+    useEffect(() => {
+        // 저장된 이메일 불러오기
+        const savedEmail = localStorage.getItem('rememberedEmail')
+        if (savedEmail) {
+            setEmail(savedEmail)
+            setRememberMe(true)
+        }
+    }, [])
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -17,21 +27,15 @@ function Login({ onSwitchToSignup }) {
 
         try {
             await signIn(email, password)
+
+            // 자동 로그인 체크 시 이메일 저장
+            if (rememberMe) {
+                localStorage.setItem('rememberedEmail', email)
+            } else {
+                localStorage.removeItem('rememberedEmail')
+            }
         } catch (error) {
             setError('로그인 실패: ' + error.message)
-        } finally {
-            setLoading(false)
-        }
-    }
-
-    async function handleQuickLogin() {
-        setLoading(true)
-        setError('')
-        try {
-            // 여기에 실제 비밀번호 입력 필요
-            await signIn('brookin@hanmail.net', 'your-password')
-        } catch (error) {
-            setError('자동 로그인 실패: ' + error.message)
         } finally {
             setLoading(false)
         }
@@ -69,22 +73,21 @@ function Login({ onSwitchToSignup }) {
                         />
                     </div>
 
+                    <div className="remember-me">
+                        <label className="checkbox-label">
+                            <input
+                                type="checkbox"
+                                checked={rememberMe}
+                                onChange={(e) => setRememberMe(e.target.checked)}
+                            />
+                            <span>자동 로그인</span>
+                        </label>
+                    </div>
+
                     <Button type="submit" variant="primary" fullWidth disabled={loading}>
                         {loading ? '로그인 중...' : '로그인'}
                     </Button>
                 </form>
-
-                <div className="quick-login">
-                    <p className="quick-login-label">빠른 테스트</p>
-                    <Button
-                        variant="outline"
-                        fullWidth
-                        onClick={handleQuickLogin}
-                        disabled={loading}
-                    >
-                        👤 관리자로 자동 로그인
-                    </Button>
-                </div>
 
                 <div className="auth-footer">
                     <p>

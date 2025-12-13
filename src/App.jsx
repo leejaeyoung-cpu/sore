@@ -30,12 +30,14 @@ function AppContent() {
     }
 
     // 로그인한 경우 - 기존 UI 표시
+    const isAdminUser = user.email === 'brookin@hanmail.net'
+
     return (
         <div className="app-container">
             <div className="app-header">
                 <div className="user-info">
                     <span>👤 {user.email}</span>
-                    {isAdmin && <span className="admin-badge">관리자</span>}
+                    {isAdminUser && <span className="admin-badge">관리자</span>}
                 </div>
                 <Button variant="ghost" size="sm" onClick={signOut}>
                     로그아웃
@@ -47,7 +49,7 @@ function AppContent() {
                     <BelieverView />
                 </MobileFrame>
 
-                {isAdmin && (
+                {isAdminUser && (
                     <MobileFrame title="관리자용">
                         <AdminView />
                     </MobileFrame>

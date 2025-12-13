@@ -230,11 +230,15 @@ function AdminView() {
         setLoading(true)
 
         try {
+            // 첫 번째 이미지를 pdf_url로도 저장 (호환성)
+            const firstImageUrl = newBulletin.images.length > 0 ? newBulletin.images[0].url : null
+
             const { error } = await supabase
                 .from('bulletins')
                 .insert({
                     title: newBulletin.title,
                     week_of: newBulletin.week_of,
+                    pdf_url: firstImageUrl, // 호환성을 위해
                     images: newBulletin.images,
                     cover_image_url: newBulletin.cover_image_url || null,
                     published_at: new Date().toISOString()
