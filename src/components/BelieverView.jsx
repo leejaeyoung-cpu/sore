@@ -215,20 +215,37 @@ function BelieverView() {
                     <p className="loading">로딩 중...</p>
                 ) : (
                     <div className="schedule-list">
-                        {Object.entries(massSchedules).map(([day, times]) => (
-                            <div key={day} className="schedule-item">
-                                <span className="schedule-day">{day}</span>
-                                <span className="schedule-time">
-                                    {times.map(t => {
-                                        const [hour, minute] = t.time.split(':')
-                                        const h = parseInt(hour)
-                                        const displayHour = h > 12 ? h - 12 : h === 0 ? 12 : h
-                                        const ampm = h >= 12 ? '오후' : '오전'
-                                        return `${ampm} ${displayHour}:${minute}`
-                                    }).join(', ')}
-                                </span>
-                            </div>
-                        ))}
+                        {Object.entries(massSchedules).map(([day, times]) => {
+                            // 시간을 오전/오후로 그룹화
+                            const formattedTimes = times.map(t => {
+                                const [hour, minute] = t.time.split(':')
+                                const h = parseInt(hour)
+                                const displayHour = h > 12 ? h - 12 : h === 0 ? 12 : h
+                                const ampm = h >= 12 ? '오후' : '오전'
+                                return { ampm, time: `${displayHour}:${minute}`, hour: h }
+                            })
+
+                            // 오전/오후별로 그룹화하여 표시
+                            const amTimes = formattedTimes.filter(t => t.ampm === '오전')
+                            const pmTimes = formattedTimes.filter(t => t.ampm === '오후')
+
+                            const timeParts = []
+                            if (amTimes.length > 0) {
+                                timeParts.push('오전 ' + amTimes.map(t => t.time).join(', '))
+                            }
+                            if (pmTimes.length > 0) {
+                                timeParts.push('오후 ' + pmTimes.map(t => t.time).join(', '))
+                            }
+
+                            return (
+                                <div key={day} className="schedule-item">
+                                    <span className="schedule-day">{day}</span>
+                                    <span className="schedule-time">
+                                        {timeParts.join(' ')}
+                                    </span>
+                                </div>
+                            )
+                        })}
                     </div>
                 )}
             </div>
