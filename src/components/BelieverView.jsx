@@ -185,6 +185,12 @@ function BelieverView({ user, signOut, isAdmin }) {
                     {/* 상단 네비게이션 */}
                     <TopNav currentPage={currentPage} onNavigate={handleNavigate} />
 
+                    {/* 페이지 제목 */}
+                    <div className="page-title-box">
+                        <span className="page-title-icon">📖</span>
+                        <h2>주보</h2>
+                    </div>
+
                     <div className="bulletins-list">
                         {bulletins.length === 0 ? (
                             <p className="empty-message">등록된 주보가 없습니다.</p>
@@ -225,6 +231,12 @@ function BelieverView({ user, signOut, isAdmin }) {
                 <div className="modern-view">
                     {/* 상단 네비게이션 */}
                     <TopNav currentPage={currentPage} onNavigate={handleNavigate} />
+
+                    {/* 페이지 제목 */}
+                    <div className="page-title-box">
+                        <span className="page-title-icon">📢</span>
+                        <h2>공지사항</h2>
+                    </div>
 
                     <div className="announcements-list">
                         {announcements.map(announcement => (
