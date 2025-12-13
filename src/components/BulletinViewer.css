@@ -241,3 +241,25 @@
   display: flex;
   justify-content: center;
 }
+
+/* PDF iframe 스타일 */
+.pdf-iframe {
+  width: 100%;
+  height: 600px;
+  border: none;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .pdf-iframe {
+    height: 500px;
+  }
+}
+
+@media (min-height: 800px) {
+  .pdf-iframe {
+    height: 70vh;
+  }
+}
