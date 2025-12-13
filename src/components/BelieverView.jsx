@@ -106,31 +106,26 @@ function BelieverView({ user, signOut, isAdmin }) {
                         </button>
                     </div>
 
-                    {/* 이번 주 공지 */}
+                    {/* 이번 주 공지 - 가로 스크롤 */}
                     {announcements.length > 0 && (
                         <section className="section">
                             <h3 className="section-title">📌 이번 주 공지</h3>
-                            <div className="notice-cards">
-                                {announcements.slice(0, 3).map(announcement => (
+                            <div className="notice-scroll-container">
+                                {announcements.slice(0, 5).map(announcement => (
                                     <div
                                         key={announcement.id}
-                                        className="notice-card"
+                                        className="notice-box"
                                         onClick={() => setSelectedAnnouncement(announcement)}
                                     >
-                                        <div className="notice-header">
-                                            <span className={`category-badge ${announcement.category}`}>
-                                                {announcement.category === 'urgent' && '🔴 긴급'}
-                                                {announcement.category === 'event' && '🎉 행사'}
-                                                {announcement.category === 'liturgy' && '⛪ 전례'}
-                                                {announcement.category === 'general' && '📌 일반'}
-                                            </span>
-                                            <span className="notice-date">
-                                                {new Date(announcement.published_at).toLocaleDateString('ko-KR')}
-                                            </span>
-                                        </div>
-                                        <h4 className="notice-title">{announcement.title}</h4>
-                                        <p className="notice-preview">
-                                            {announcement.content.substring(0, 60)}...
+                                        <span className={`category-badge ${announcement.category}`}>
+                                            {announcement.category === 'urgent' && '🔴 긴급'}
+                                            {announcement.category === 'event' && '🎉 행사'}
+                                            {announcement.category === 'liturgy' && '⛪'}
+                                            {announcement.category === 'general' && '📌'}
+                                        </span>
+                                        <h4 className="notice-box-title">{announcement.title}</h4>
+                                        <p className="notice-box-date">
+                                            {new Date(announcement.published_at).toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' })}
                                         </p>
                                     </div>
                                 ))}
@@ -141,21 +136,41 @@ function BelieverView({ user, signOut, isAdmin }) {
                     {/* 미사 시간표 */}
                     <section className="section">
                         <h3 className="section-title">⏰ 미사 시간</h3>
-                        <div className="schedule-table">
-                            {Object.entries(massSchedules).map(([day, times]) => (
-                                <div key={day} className="schedule-row">
-                                    <div className="schedule-day">{day}</div>
-                                    <div className="schedule-time">
-                                        {times.map(t => {
-                                            const [hour, minute] = t.time.split(':')
-                                            const h = parseInt(hour)
-                                            const displayHour = h > 12 ? h - 12 : h === 0 ? 12 : h
-                                            const ampm = h >= 12 ? '오후' : '오전'
-                                            return `${ampm} ${displayHour}:${minute}`
-                                        }).join(', ')}
-                                    </div>
+                        <div className="schedule-table-modern">
+                            {/* 일요일 */}
+                            <div className="schedule-card">
+                                <div className="schedule-day-badge sunday">일요일</div>
+                                <div className="schedule-times">
+                                    <div className="schedule-time-item">오전 9:00</div>
+                                    <div className="schedule-time-item">오전 11:00 <span className="time-label">(교중미사)</span></div>
+                                    <div className="schedule-time-item">오후 6:00 <span className="time-label">(청년)</span></div>
                                 </div>
-                            ))}
+                            </div>
+
+                            {/* 월,수,금 */}
+                            <div className="schedule-card">
+                                <div className="schedule-day-badge">월, 수, 금</div>
+                                <div className="schedule-times">
+                                    <div className="schedule-time-item">오전 10:00</div>
+                                </div>
+                            </div>
+
+                            {/* 화,목 */}
+                            <div className="schedule-card">
+                                <div className="schedule-day-badge">화, 목</div>
+                                <div className="schedule-times">
+                                    <div className="schedule-time-item">오후 7:00</div>
+                                </div>
+                            </div>
+
+                            {/* 토요일 */}
+                            <div className="schedule-card">
+                                <div className="schedule-day-badge saturday">토요일</div>
+                                <div className="schedule-times">
+                                    <div className="schedule-time-item">오후 4:00 <span className="time-label">(어린이)</span></div>
+                                    <div className="schedule-time-item">오후 6:00 <span className="time-label">(중·고등부/특전미사)</span></div>
+                                </div>
+                            </div>
                         </div>
                     </section>
 
