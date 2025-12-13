@@ -192,9 +192,6 @@ function BelieverView({ user, signOut, isAdmin }) {
         return (
             <>
                 <div className="modern-view">
-                    {/* 상단 네비게이션 */}
-                    <TopNav currentPage={currentPage} onNavigate={handleNavigate} />
-
                     {/* 페이지 제목 */}
                     <div className="page-title-box">
                         <span className="page-title-icon">📖</span>
@@ -252,9 +249,6 @@ function BelieverView({ user, signOut, isAdmin }) {
         return (
             <>
                 <div className="modern-view">
-                    {/* 상단 네비게이션 */}
-                    <TopNav currentPage={currentPage} onNavigate={handleNavigate} />
-
                     {/* 페이지 제목 */}
                     <div className="page-title-box">
                         <span className="page-title-icon">📢</span>
