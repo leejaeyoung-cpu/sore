@@ -6,7 +6,7 @@ import BulletinViewer from './BulletinViewer'
 import AnnouncementViewer from './AnnouncementViewer'
 import { getMassSchedulesByDay, getActiveAnnouncements, getLatestBulletins } from '../lib/queries'
 
-function BelieverView({ user, signOut, isAdmin }) {
+function BelieverView() {
     const [massSchedules, setMassSchedules] = useState({})
     const [announcements, setAnnouncements] = useState([])
     const [bulletins, setBulletins] = useState([])
@@ -164,13 +164,6 @@ function BelieverView({ user, signOut, isAdmin }) {
     // 홈 화면
     return (
         <div className="believer-view">
-            {/* 로그아웃 버튼 - 홈 화면에만 표시 */}
-            <div className="home-header">
-                <button className="logout-btn-small" onClick={signOut}>
-                    로그아웃
-                </button>
-            </div>
-
             <img
                 src="/다운로드.jpg"
                 alt="본당 사진"

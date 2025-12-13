@@ -34,9 +34,19 @@ function AppContent() {
 
     return (
         <div className="app-container">
+            <div className="app-header">
+                <div className="user-info">
+                    <span>👤 {user.email}</span>
+                    {isAdminUser && <span className="admin-badge">관리자</span>}
+                </div>
+                <Button variant="ghost" size="sm" onClick={signOut}>
+                    로그아웃
+                </Button>
+            </div>
+
             <div className="frames-container">
                 <MobileFrame title="신자용">
-                    <BelieverView user={user} signOut={signOut} isAdmin={isAdminUser} />
+                    <BelieverView />
                 </MobileFrame>
 
                 {isAdminUser && (

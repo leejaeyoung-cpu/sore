@@ -1,24 +1,404 @@
-﻿
-.home-header {
-  display: flex;
-  justify-content: flex-end;
-  padding: var(--space-sm) var(--space-md);
-  margin-bottom: var(--space-md);
+.believer-view {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
 }
 
-.logout-btn-small {
-  padding: 8px 16px;
-  background: transparent;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  font-size: 0.85rem;
+.church-photo {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+}
+
+.button-section {
+    padding: 2rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.app-button {
+    flex: 1;
+    padding: 1.25rem 0;
+    border: none;
+    border-radius: 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.app-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.app-button:hover::before {
+    left: 100%;
+}
+
+.app-button.primary {
+    background: linear-gradient(135deg, #2c5aa0 0%, #4a7bc8 100%);
+    color: white;
+}
+
+.app-button.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(44, 90, 160, 0.4);
+}
+
+.app-button.secondary {
+    background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+    color: #1e3a6d;
+}
+
+.app-button.secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+}
+
+.mass-schedule {
+    flex: 1;
+    padding: 1.5rem;
+    background: white;
+}
+
+.mass-schedule h2 {
+    font-size: 1.5rem;
+    color: #1e3a6d;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+.schedule-list {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.schedule-item {
+    padding: 1rem 0;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.schedule-item:last-child {
+    border-bottom: none;
+}
+
+.schedule-day {
+    font-weight: 600;
+    color: #2c5aa0;
+    font-size: 0.95rem;
+}
+
+.schedule-time {
+    color: #495057;
+    font-size: 0.9rem;
+}
+/* 공지사항 미리보기 */
+.announcements-preview {
+    padding: var(--space-lg);
+    background: white;
+}
+
+.announcements-preview h3 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+    font-weight: 600;
+}
+
+.announcement-card {
+    margin-bottom: var(--space-md);
+}
+
+.announcement-card:last-child {
+    margin-bottom: 0;
+}
+
+.announcement-category {
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: var(--space-xs);
+    color: var(--primary);
+}
+
+.announcement-card h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-xs) 0;
+}
+
+.announcement-preview {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.loading {
+    text-align: center;
+    color: var(--text-muted);
+    padding: var(--space-lg);
+}
+
+/* �̻� �ð�ǥ ���� */
+.mass-schedule {
+    flex: 1;
+    padding: 2rem 1.5rem;
+    background: white;
+}
+
+.mass-schedule h2 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.schedule-list {
+    background: transparent;
+    padding: 0;
+}
+
+.schedule-item {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: white;
+    transition: background var(--transition-fast);
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.schedule-item:hover {
+    background: var(--bg-hover);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.schedule-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.schedule-day {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 1rem;
+    min-width: 80px;
+}
+
+.schedule-time {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    text-align: right;
+    flex: 1;
+    line-height: 1.6;
+}
+
+/* 공지사항 이미지 미리보기 */
+.announcement-image-preview {
+    margin-top: var(--space-sm);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.announcement-image-preview img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+/* 공지사항 전체보기 화면 */
+.announcements-view {
+    background: white;
+}
+
+.view-header {
+    padding: var(--space-lg);
+    background: white;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.back-button {
+    padding: var(--space-sm) var(--space-md);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    color: var(--text-primary);
+}
+
+.back-button:hover {
+    background: var(--bg-hover);
+}
+
+.view-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.announcements-full-list {
+    padding: var(--space-lg);
+}
+
+.announcement-full-card {
+    margin-bottom: var(--space-lg);
+}
+
+.announcement-full-card h3 {
+    margin: var(--space-sm) 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.announcement-content {
+    margin: var(--space-md) 0;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    white-space: pre-wrap;
+}
+
+.announcement-image-full {
+    margin-top: var(--space-md);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.announcement-image-full img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+    display: block;
+}
+
+.empty-message {
+    text-align: center;
+    padding: var(--space-2xl);
+    color: var(--text-muted);
+}
+
+.category-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+}
+
+.category-general {
+    background: #F5F5F5;
+    color: #616161;
+}
+
+.category-urgent {
+    background: #FFEBEE;
+    color: #C62828;
+}
+
+.category-event {
+    background: #E8F5E9;
+    color: #2E7D32;
+}
+
+.category-liturgy {
+    background: #E3F2FD;
+    color: #1565C0;
+}
+
+/* 주보 목록 화면 */
+.bulletins-view {
+    background: white;
+}
+
+.bulletins-full-list {
+    padding: var(--space-lg);
+}
+
+.bulletin-card-full {
+    margin-bottom: var(--space-lg);
+}
+
+.bulletin-cover-full {
+    margin-bottom: var(--space-md);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.bulletin-cover-full img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    display: block;
+}
+
+.bulletin-info {
+    margin-bottom: var(--space-md);
+}
+
+.bulletin-info h3 {
+    margin: 0 0 var(--space-xs) 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.bulletin-date-full {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+/* 공지사항 미리보기 */
+.announcement-preview {
   color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: var(--space-sm) 0 0 0;
+}
+
+.announcement-full-card {
   cursor: pointer;
   transition: all 0.2s;
 }
 
-.logout-btn-small:hover {
-  background: var(--bg-hover);
-  color: var(--text-primary);
-  border-color: var(--text-secondary);
+.announcement-full-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
