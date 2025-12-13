@@ -402,3 +402,62 @@
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
+
+/* 홈 화면 헤더 - 사용자 정보 */
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-hover);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-md);
+}
+
+.user-info-inline {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.user-email {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.admin-badge-small {
+  display: inline-block;
+  padding: 2px 8px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.logout-btn-small {
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logout-btn-small:hover {
+  background: var(--border);
+  color: var(--text-primary);
+}
+
+@media (max-width: 480px) {
+  .user-email {
+    font-size: 0.75rem;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
