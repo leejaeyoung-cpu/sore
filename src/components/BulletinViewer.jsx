@@ -5,6 +5,11 @@ function BulletinViewer({ bulletin, onClose }) {
     const isPDF = bulletin.pdf_url?.toLowerCase().endsWith('.pdf')
     const hasCoverImage = bulletin.cover_image_url
 
+    // PDF를 Google Docs Viewer로 표시
+    const pdfViewerUrl = isPDF
+        ? `https://docs.google.com/viewer?url=${encodeURIComponent(bulletin.pdf_url)}&embedded=true`
+        : null
+
     return (
         <div className="bulletin-viewer-overlay" onClick={onClose}>
             <div className="bulletin-viewer" onClick={(e) => e.stopPropagation()}>
@@ -30,10 +35,13 @@ function BulletinViewer({ bulletin, onClose }) {
                     {isPDF ? (
                         <div className="bulletin-pdf-section">
                             <iframe
-                                src={bulletin.pdf_url}
+                                src={pdfViewerUrl}
                                 className="pdf-iframe"
                                 title={bulletin.title}
                             />
+                            <p className="pdf-hint">
+                                💡 PDF가 안 보이면 <button className="inline-link" onClick={() => window.open(bulletin.pdf_url, '_blank')}>여기를 클릭</button>하세요
+                            </p>
                         </div>
                     ) : (
                         // PDF가 없고 이미지만 있는 경우
