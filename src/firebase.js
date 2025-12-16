@@ -43,7 +43,7 @@ export const requestFCMToken = async () => {
 
         // FCM 토큰 생성
         const token = await getToken(messaging, {
-            vapidKey: import.meta.env.VITE_FIREBASE_VAPID_KEY,
+            vapidKey: 'BIfXufRMoPhpnZ4qjaCmU1xdmzdiChvzYuxPWKDRxrvrCST2swuaXnU3cbhIbvA0E2ieKjalgJw7BkNXrphbE6o',
             serviceWorkerRegistration: registration
         });
 
