@@ -1,0 +1,24 @@
+﻿**********************
+Windows PowerShell 기록 시작
+시작 시간: 20251217132513
+사용자 이름: BROOKIN\brook
+RunAs 사용자: BROOKIN\brook
+구성 이름: 
+Machine: BROOKIN (Microsoft Windows NT 10.0.26200.0)
+호스트 응용 프로그램: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -noexit -command try { . "c:\Users\brook\AppData\Local\Programs\Antigravity\resources\app\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration.ps1" } catch {}
+프로세스 ID: 27008
+PSVersion: 5.1.26100.7462
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.7462
+BuildVersion: 10.0.26100.7462
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+기록이 시작되었습니다. 출력 파일은 build-transcript.txt입니다.
+
+**********************
+Windows PowerShell 기록 끝
+종료 시간: 20251217132515
+**********************

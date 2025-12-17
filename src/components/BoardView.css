@@ -1,0 +1,228 @@
+/* 게시??�??��???*/
+
+.board-view {`r`n  max-width: 800px;`r`n  margin: 0 auto;`r`n  margin-bottom: 0;`r`n  padding: 1rem;`r`n  padding-bottom: 0;`r`n}
+
+/* ?�더 */
+.board-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.board-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #1a202c;
+}
+
+.write-btn {
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.write-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.write-btn:active {
+    transform: translateY(0);
+}
+
+/* ??*/
+.board-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.board-tabs .tab {
+    padding: 0.75rem 1.5rem;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #718096;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.board-tabs .tab:hover {
+    color: #667eea;
+}
+
+.board-tabs .tab.active {
+    color: #667eea;
+    border-bottom-color: #667eea;
+    font-weight: 600;
+}
+
+/* 그룹 ?�택 */
+.group-selector {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #f7fafc;
+    border-radius: 8px;
+}
+
+.no-groups {
+    margin: 0;
+    text-align: center;
+    color: #a0aec0;
+    font-size: 0.9rem;
+}
+
+.group-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.group-chip {
+    padding: 0.5rem 1rem;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #4a5568;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.group-chip:hover {
+    border-color: #667eea;
+    color: #667eea;
+}
+
+.group-chip.selected {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+    color: white;
+    font-weight: 600;
+}
+
+/* 게시글 목록 */
+.posts-list {`r`n  display: flex;`r`n  flex-direction: column;`r`n  gap: 1rem;`r`n  margin-bottom: 0;`r`n}
+
+.loading,
+.no-posts {
+    text-align: center;
+    padding: 3rem;
+    color: #a0aec0;
+    font-size: 1rem;
+}
+
+/* 게시글 ?�이??*/
+.post-item {
+    padding: 1.5rem;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.post-item:hover {
+    border-color: #667eea;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.pin-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: #fed7d7;
+    color: #c53030;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.post-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1a202c;
+    line-height: 1.4;
+}
+
+.post-preview {
+    margin: 0 0 1rem 0;
+    color: #4a5568;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #a0aec0;
+}
+
+.post-meta .author {
+    font-weight: 500;
+    color: #4a5568;
+}
+
+.post-meta .separator {
+    color: #e2e8f0;
+}
+
+.post-meta .media-badge {
+    margin-left: auto;
+    font-size: 1.2rem;
+}
+
+/* 모바??반응??*/
+@media (max-width: 768px) {
+    .board-view {`r`n  max-width: 800px;`r`n  margin: 0 auto;`r`n  margin-bottom: 0;`r`n  padding: 1rem;`r`n  padding-bottom: 0;`r`n}
+
+    .board-header h2 {
+        font-size: 1.25rem;
+    }
+
+    .write-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .board-tabs .tab {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .group-chip {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+    }
+
+    .post-item {
+        padding: 1rem;
+    }
+
+    .post-title {
+        font-size: 1rem;
+    }
+
+    .post-preview {
+        font-size: 0.85rem;
+    }
+}
+
+
+
+
+

@@ -1,0 +1,75 @@
+.push-notification-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    color: white;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: transform 0.2s;
+}
+
+.push-notification-card:hover {
+    transform: translateY(-2px);
+}
+
+.push-notification-card.subscribed {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.push-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.push-content {
+    flex: 1;
+}
+
+.push-content h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.push-content p {
+    margin: 0 0 1rem 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.subscribe-button {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.subscribe-button:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+}
+
+.subscribe-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+    .push-notification-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .push-icon {
+        font-size: 3rem;
+    }
+}

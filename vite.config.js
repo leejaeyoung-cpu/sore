@@ -11,6 +11,7 @@ export default defineConfig({
       manifest: {
         name: '성당 관리 시스템',
         short_name: '성당앱',
+        gcm_sender_id: "103953800507",
         description: '성당 공지사항, 주보, 미사 시간표를 확인하세요',
         theme_color: '#667eea',
         background_color: '#ffffff',

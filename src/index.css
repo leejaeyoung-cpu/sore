@@ -133,3 +133,8 @@ body {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
+body, html {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden;
+}

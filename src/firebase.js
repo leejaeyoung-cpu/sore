@@ -1,15 +1,15 @@
 import { initializeApp } from 'firebase/app';
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
 
-// Firebase 설정
+// Firebase 설정 (환경변수 문제 해결을 위해 하드코딩)
 const firebaseConfig = {
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-    appId: import.meta.env.VITE_FIREBASE_APP_ID,
-    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
+    apiKey: "AIzaSyAgrbBWJ-FaWOC9QMIk0uo1xzycR5weC9I",
+    authDomain: "sorae-pogu-church.firebaseapp.com",
+    projectId: "sorae-pogu-church",
+    storageBucket: "sorae-pogu-church.firebasestorage.app",
+    messagingSenderId: "7017635036",
+    appId: "1:7017635036:web:3c62ac4f1991d2aeaf6819",
+    measurementId: "G-B53R5BNG2G"
 };
 
 // Firebase 초기화
@@ -56,15 +56,13 @@ export const requestFCMToken = async () => {
 };
 
 // 포그라운드 메시지 수신
-export const onMessageListener = () =>
-    new Promise((resolve) => {
-        if (!messaging) return;
-
-        onMessage(messaging, (payload) => {
-            console.log('📩 메시지 수신:', payload);
-            resolve(payload);
-        });
+export const onMessageListener = (callback) => {
+    if (!messaging) return;
+    onMessage(messaging, (payload) => {
+        console.log('📩 메시지 수신:', payload);
+        callback(payload);
     });
+};
 
 console.log('✅ Firebase 초기화 완료');
 
